@@ -1,0 +1,32 @@
+Para abrir o terminal basta utilizar o atalho CTRL + J ;
+
+Para verificar a versão de qualquer coisa que foi instalada, pode-se abrir o 
+terminal e digitar o 'nomeDaCoisa' --version ou 'nomdeDaCoisa' -v
+Por exemplo: node --version ;
+
+Para dizer que este é um projeto Node, precisa-se criar uma pequena estrutura para
+os interpretadores identifiquem como um projeto Node;
+
+Quando instala-se o Node, instala-se juntamente o npm, que é um gerenciador que auxília
+o Node, como por exemplo, os comandos no terminal. 
+Ou seja, este comando:      npm init es6 -y
+Está dizendo para o npm iniciar o ECMAScript6 e o -y , refere-se a remoção de 
+algumas confirmações que seria necessário aceitar para a continuação;
+
+Executando o código já é criado automaticamente um arquivo novo. Quando se é utilizado
+o npm init, já cria-se uma estrutura de projeto node. 
+O que faz parte dessa estrutura?
+O arquivo package.json.
+O que este arquivo faz?
+Duas coisa, descreve o projeto e versão em que ele está, e também descreve as 
+DEPÊNDENCIAS e TECNOLOGIAS que o projeto usa.
+Ou seja, tudo que for externo que será usado no projeto, tem que aparecer neste arquivo;
+
+No dia a dia de códigos, é muito comum a utilização de trechos de códigos prontos, para
+realizar tarefas repetitivas, como validações, requisições, já que esses trechos já foram
+debugados e testados pela comunidade. Um dos mais comuns é o Express;
+
+O Express entra neste projeto, para não haver a necessidade de criar um código gigantesco
+de um servidor, reaproveitando assim um código pronto. Então existe um módulo do Node que
+ajuda a criar um servidor e servir o projeto;
+
