@@ -3,6 +3,10 @@
  * foi instalado o arquivo express
  * */ 
 import express from "express";
+// importando a função para conectar ao banco de dados , do arquivo dbConfig
+import conectarAoBanco from "./src/config/dbConfig.js";
+
+await conectarAoBanco(process.env.STRING_CONEXAO)
 
 // Criando um array
 const posts = [
@@ -81,3 +85,10 @@ app.get("/posts/:id", (req, res) => {
     const index = buscarPostPorID(req.params.id)
     res.status(200).json(posts[index]);
 });
+
+/**
+ * Agora instalamos no console a capacidade do projeto se comunicar com o banco mongo
+ * npm install mongodb
+ * 
+ * Mas ainda precisa-se configurar a conexão
+ * */ 
