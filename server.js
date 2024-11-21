@@ -1,94 +1,42 @@
-/**
- * importando da pasta node_modules criada quando o express 
- * foi instalado o arquivo express
- * */ 
+// Importa o framework Express.js, que será utilizado para criar a aplicação web.
 import express from "express";
-// importando a função para conectar ao banco de dados , do arquivo dbConfig
 import conectarAoBanco from "./src/config/dbConfig.js";
 
-await conectarAoBanco(process.env.STRING_CONEXAO)
+// Cria uma conexão com o banco de dados. A string de conexão é obtida da variável de ambiente STRING_CONEXAO.
+const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 
-// Criando um array
+// Define um array (lista) chamado "posts", que armazenará os dados dos posts (publicações).
+// Cada objeto dentro do array representa um post, com as propriedades id, descricao e imagem.
 const posts = [
-    // criando um objeto
-    {
-        id: 1,
+    { 
+        id: 1, 
         descricao: "Uma foto teste", 
-        imagem: "https://placecats.com/millie/300/150"
-    } ,
-    {
-        id: 2,
-        descricao: "Gato fazendo yoga",
-        imagem: "https://placecats.com/millie/300/150"
-    } ,
-    {
-        id: 3,
-        descricao: "Gatinho dormindo",
-        imagem: "https://placecats.com/millie/300/150"
-    } ,
-    {
-        id: 4,
-        descricao: "Receita deliciosa de bolo de chocolate!",
-        imagem: "https://placecats.com/millie/300/150"
-    } ,
-    {
-        id: 5,
-        descricao: "Meu novo cachorro",
-        imagem: "https://placecats.com/millie/300/150"
-    } ,
-    {
-        id: 6,
-        descricao: "Alpes suíços",
-        imagem: "https://placecats.com/millie/300/150"
-    } 
-] ;
+        imagem: "https://placecats.com/millie/300/150" 
+    },
+    { 
+        id: 2, 
+        descricao: "Gato fazendo yoga", 
+        imagem: "https://placecats.com/millie/300/150" 
+    },
+];
 
-/**
- * iniciando express
- * Express é uma função que quando for executada passará o resultado
- * para dentro da variável app.
- * Como se app representasse o servidor
- * */ 
+// Cria uma instância do Express.js, que será o ponto de partida da aplicação.
 const app = express();
 
-// parssear o texto do array em json
-app.use(express.json());
-
-/**
- * Fazendo o servidor 'SUBIR'
- * Esta função recebe dois parâmetros.
- * Uma porta e uma função.
- * */ 
+// Inicia o servidor Express.js, escutando na porta 3000.
+// A função de callback é executada quando o servidor está pronto para receber requisições.
 app.listen(3000, () => {
-    console.log("Servidor escutando....");
-});
-/**
- * Criando um caminho para o computador cliente recuperar dados.
- * 
- * */ 
-app.get("/posts", (req, res) => {
-    res.status(200).json(posts);
+    console.log("Servidor escutando...");
 });
 
-// criando uma função que busque por ids dentro do array
-function buscarPostPorID(id) {
-    return posts.findIndex((post) => {
-        return post.id === Number(id)
-    })
+// Define uma função assíncrona chamada "getTodosPosts" para buscar todos os posts do banco de dados.
+async function getTodosPosts() {
+    // Obtém uma referência ao banco de dados "imersao-instabytes".
+    const db = conexao.db("imersao-instabytes");
+
+    // Obtém uma referência à coleção "posts" dentro do banco de dados.
+    const colecao = db.collection("posts");
+
+    // Executa uma consulta para encontrar todos os documentos (posts) na coleção e retorna os resultados como um array.
+    return colecao.find().toArray();
 }
-
-/**
- * O que siginifica esses dois pontos?
- * Os ':' diz para o express que esta informação quando for no navegador, será subistítuida por um dando variável.
- * */ 
-app.get("/posts/:id", (req, res) => {
-    const index = buscarPostPorID(req.params.id)
-    res.status(200).json(posts[index]);
-});
-
-/**
- * Agora instalamos no console a capacidade do projeto se comunicar com o banco mongo
- * npm install mongodb
- * 
- * Mas ainda precisa-se configurar a conexão
- * */ 
