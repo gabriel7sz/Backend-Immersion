@@ -1,10 +1,12 @@
+//Representação de dados para enviar para o banco
+
 import conectarAoBanco from "../config/dbConfig.js"
 
 // Cria uma conexão com o banco de dados. A string de conexão é obtida da variável de ambiente STRING_CONEXAO.
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
 
 // Define uma função assíncrona chamada "getTodosPosts" para buscar todos os posts do banco de dados.
-export default async function getTodosPosts() {
+export async function getTodosPosts() {
     // Obtém uma referência ao banco de dados "imersao-instabytes".
     const db = conexao.db("imersao-instabytes");
 
@@ -14,3 +16,9 @@ export default async function getTodosPosts() {
     // Executa uma consulta para encontrar todos os documentos (posts) na coleção e retorna os resultados como um array.
     return colecao.find().toArray();
 }
+
+export async function criarPost(novoPost) {
+    const db = conexao.db("imersao-instabytes");
+    const colecao = db.collection("posts");
+    return colecao.insertOne(novoPost);
+};

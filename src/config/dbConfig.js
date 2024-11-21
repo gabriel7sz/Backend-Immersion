@@ -1,11 +1,4 @@
-/**
- * Quando se instala drivers terceiros para a utilização, é sempre importante ler a documentação para saber o que é necessário para rodar a aplicação com o uso daquele driver.
- * 
- * Mesma coisa acontece com o mongoDb, ele necessita de funções específicas que tem que ser executadas para funcionar a conexão.
- * Chamamos isso de receita de bolo...
- * 
- * Segue o código receita de bolo para a conexão do mongo com o banco de dados.
- * */ 
+// Configuração para banco de dados (receita de bolo)
 
 import { MongoClient } from "mongodb";
 
