@@ -1,4 +1,4 @@
-import conectarAoBanco from "../dbConfig.js"
+import conectarAoBanco from "../config/dbConfig.js"
 
 // Cria uma conexão com o banco de dados. A string de conexão é obtida da variável de ambiente STRING_CONEXAO.
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);

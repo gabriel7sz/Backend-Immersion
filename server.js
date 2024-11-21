@@ -1,6 +1,6 @@
 // Importa o framework Express.js, que será utilizado para criar a aplicação web.
 import express from "express";
-import routes from "./src/config/routes/postRouts.js";
+import routes from "./src/routes/postRouts.js";
 
 // Define um array (lista) chamado "posts", que armazenará os dados dos posts (publicações).
 // Cada objeto dentro do array representa um post, com as propriedades id, descricao e imagem.
