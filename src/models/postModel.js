@@ -1,6 +1,7 @@
 //Representação de dados para enviar para o banco
-
-import conectarAoBanco from "../config/dbConfig.js"
+import 'dotenv/config';
+import { ObjectId } from "mongodb";
+import conectarAoBanco from "../config/dbConfig.js";
 
 // Cria uma conexão com o banco de dados. A string de conexão é obtida da variável de ambiente STRING_CONEXAO.
 const conexao = await conectarAoBanco(process.env.STRING_CONEXAO);
@@ -21,4 +22,11 @@ export async function criarPost(novoPost) {
     const db = conexao.db("imersao-instabytes");
     const colecao = db.collection("posts");
     return colecao.insertOne(novoPost);
+};
+
+export async function atualizarPost(id, novoPost) {
+    const db = conexao.db("imersao-instabytes");
+    const colecao = db.collection("posts");
+    const objID = ObjectId.createFromHexString(id)
+    return colecao.updateOne({_id: new ObjectId(objID)}, {$set:novoPost});
 };
